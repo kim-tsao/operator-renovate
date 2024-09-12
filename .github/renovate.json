@@ -18,6 +18,19 @@
   "constraints": {
     "go": "1.21"
   },
+  "kubernetes": [
+    {
+      "description": "kustomize: limit to just patch updates",
+      "fileMatch": [
+        "(^|/)kustomization\\.ya?ml$"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "pinDigests": false,
+      "automerge": false
+    }
+  ],   
   "packageRules": [
     {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
@@ -209,18 +222,7 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
-    },
-    {
-      "description": "limit kustomize updates to patches",
-      "fileMatch": [
-        "(^|/)kustomization\\.ya?ml$"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "pinDigests": false,
-      "automerge": false
-    }    
+    }
   ],
   "vulnerabilityAlerts": {
     "enabled": true,
