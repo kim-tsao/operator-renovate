@@ -218,7 +218,8 @@
       "matchUpdateTypes": [
         "patch"
       ],
-      "pinDigests": false
+      "pinDigests": false,
+      "automerge": false
     }    
   ],
   "vulnerabilityAlerts": {
