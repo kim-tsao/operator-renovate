@@ -20,6 +20,11 @@
   },
   "packageRules": [
     {
+      "matchManagers": ["kustomize"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": false
+    },    
+    {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
       "enabled": false,
       "matchDatasources": [
@@ -209,11 +214,6 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
-    },
-    {
-      "matchManagers": ["kustomize"],
-      "matchUpdateTypes": ["patch"],
-      "automerge": false
     }
   ],
   "vulnerabilityAlerts": {
