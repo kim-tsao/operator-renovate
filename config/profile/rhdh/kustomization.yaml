@@ -29,7 +29,7 @@ patches:
 images:
 - name: controller
   newName: quay.io/rhdh-community/operator
-  newTag: 0.3.0
+  newTag: 0.2.2
 
 generatorOptions:
   disableNameSuffixHash: true
