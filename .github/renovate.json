@@ -209,7 +209,17 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
-    }
+    },
+    {
+      "description": "limit kustomize updates to patches",
+      "fileMatch": [
+        "(^|/)kustomization\\.ya?ml$"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "pinDigests": false
+    }    
   ],
   "vulnerabilityAlerts": {
     "enabled": true,
