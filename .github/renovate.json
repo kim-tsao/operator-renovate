@@ -18,8 +18,7 @@
   "constraints": {
     "go": "1.21"
   },
-  "kubernetes": [
-    {
+  "kubernetes": {
       "description": "kustomize: limit to just patch updates",
       "fileMatch": [
         "(^|/)kustomization\\.ya?ml$"
@@ -29,8 +28,7 @@
       ],
       "pinDigests": false,
       "automerge": false
-    }
-  ],   
+  },
   "packageRules": [
     {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
