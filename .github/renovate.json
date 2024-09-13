@@ -18,13 +18,10 @@
   "constraints": {
     "go": "1.21"
   },
+  "kustomize": {
+    "enabled": false
+  }, 
   "packageRules": [
-    {
-      "matchManagers": ["kustomize"],
-      "matchUpdateTypes": ["patch"],
-      "pinDigests": false,
-      "automerge": false
-    },    
     {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
       "enabled": false,
