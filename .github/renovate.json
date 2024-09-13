@@ -19,7 +19,7 @@
     "go": "1.21"
   },
   "kustomize": {
-    "enabled": false
+    "enabled": true
   }, 
   "packageRules": [
     {
