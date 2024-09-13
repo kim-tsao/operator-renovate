@@ -22,6 +22,7 @@
     {
       "matchManagers": ["kustomize"],
       "matchUpdateTypes": ["patch"],
+      "pinDigests": false,
       "automerge": false
     },    
     {
