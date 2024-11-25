@@ -46,8 +46,8 @@
         "patch"
       ],
       "additionalBranchPrefix": "dockerfile ",
-      "groupName": "Update all {{additionalBranchPrefix}} images",
-      "automerge": true,
+      "groupName": "Update all dockerfile images",
+      "automerge": false,
       "pinDigests": false
     },
     {
