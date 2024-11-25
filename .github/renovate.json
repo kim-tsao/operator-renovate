@@ -45,6 +45,7 @@
       "matchUpdateTypes": [
         "patch"
       ],
+      "additionalBranchPrefix": "dockerfile",
       "automerge": true,
       "pinDigests": false
     },
