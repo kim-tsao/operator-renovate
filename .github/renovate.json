@@ -62,7 +62,7 @@
     },
     {
       "description": "ginkgo: patch updates only in 1.y (disabled because Go 1.22+ is required since ginkgo 2.20.2)",
-      "enabled": false,
+      "enabled": true,
       "groupName": "ginkgo 1.y",
       "matchDatasources": [
         "go"
@@ -81,7 +81,7 @@
     },
     {
       "description": "gomega: patch updates only in 1.y (disabled since Go 1.22+ is required since gomega 1.34.2)",
-      "enabled": false,
+      "enabled": true,
       "groupName": "gomega 1.y",
       "matchDatasources": [
         "go"
