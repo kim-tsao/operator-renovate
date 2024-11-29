@@ -46,8 +46,8 @@
         "patch"
       ],
       "additionalBranchPrefix": "dockerfile ",
-      "groupName": "All dockerfile images",
-      "automerge": false,
+      "groupName": "All dockerfile images",      
+      "automerge": true,
       "pinDigests": false
     },
     {
