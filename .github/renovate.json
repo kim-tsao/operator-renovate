@@ -34,20 +34,6 @@
       "automerge": false
     },
     {
-      "description": "Do automerge patch updates to dockerfiles",
-      "enabled": true,
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "additionalBranchPrefix": "dockerfile ",
-      "groupName": "All dockerfile images",      
-      "automerge": true,
-      "pinDigests": false
-    },
-    {
       "description": "k8s go: minor and patch updates in main (suspended till UBI w/ go 1.22)",
       "enabled": false,
       "groupName": "k8s-go main",
@@ -213,6 +199,20 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
+    },
+    {
+      "description": "Do automerge patch updates to dockerfiles",
+      "enabled": true,
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "additionalBranchPrefix": "dockerfile ",
+      "groupName": "All dockerfile images",      
+      "automerge": true,
+      "pinDigests": false
     }
   ],
   "vulnerabilityAlerts": {
