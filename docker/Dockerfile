@@ -1,11 +1,20 @@
-# THIS IS USED BY Konflux builds >= 1.4
-# TODO verify this works with Cachi2 once we enable that, or switch to use ../.rhdh/docker/Dockerfile as input
+#
+# Copyright (c) 2023 Red Hat, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-#@follow_tag(registry.redhat.io/rhel9/go-toolset:latest)
-# https://registry.access.redhat.com/ubi9/go-toolset
-FROM registry.access.redhat.com/ubi9/go-toolset:9.5-1730550521@sha256:b23212b6a296e95cbed5dd415d4cd5567db9e8057aa08e291f1fddc087cea944 AS builder
-ARG TARGETOS
-ARG TARGETARCH
+#@follow_tag(registry.redhat.io/rhel9/go-toolset:1.21)
+# https://registry.access.redhat.com/ubi9/go-toolset:1.21
+FROM registry.access.redhat.com/ubi9/go-toolset:1.21.13-2.1729776560@sha256:97e30a01caeece72ee967013e7c7af777ea4ee93840681ddcfe38a87eb4c084a AS builder
 # hadolint ignore=DL3002
 USER 0
 ENV GOPATH=/go/
@@ -26,11 +35,11 @@ WORKDIR /workspace
 # WORKDIR $CONTAINER_SOURCE/
 #/ Downstream uncomment
 
+COPY $EXTERNAL_SOURCE ./
+
 # cache deps before building and copying source so that we don't need to re-download as much
 # and so that source changes don't invalidate our downloaded layer
 # Downstream comment
-COPY $EXTERNAL_SOURCE/go.mod ./go.mod
-COPY $EXTERNAL_SOURCE/go.sum ./go.sum
 RUN go mod download
 #/ Downstream comment
 
@@ -39,29 +48,16 @@ RUN go mod download
 # RUN source ./cachito.env && rm -f ./cachito.env && mkdir -p /workspace
 #/ Downstream uncomment
 
-COPY $EXTERNAL_SOURCE/api/ ./api/
-COPY $EXTERNAL_SOURCE/cmd/ ./cmd/
-COPY $EXTERNAL_SOURCE/config/ ./config/
-COPY $EXTERNAL_SOURCE/internal/ ./internal/
-COPY $EXTERNAL_SOURCE/pkg/ ./pkg/
-
 # Build
 # hadolint ignore=SC3010
-# Build
-# the GOARCH has not a default value to allow the binary be built according to the host where the command
-# was called. For example, if we call make docker-build in a local env which has the Apple Silicon M1 SO
-# the docker BUILDPLATFORM arg will be linux/arm64 when for Apple x86 it will be linux/amd64. Therefore,
-# by leaving it empty we can ensure that the container and binary shipped on it will have the same platform.
-RUN CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH} go build -a -o manager cmd/main.go
+RUN export ARCH="$(uname -m)" && if [[ ${ARCH} == "x86_64" ]]; then export ARCH="amd64"; elif [[ ${ARCH} == "aarch64" ]]; then export ARCH="arm64"; fi && \
+    CGO_ENABLED=1 GOOS=linux GOARCH=${ARCH} go build -a -o manager main.go
 
 # Install openssl for FIPS support
 #@follow_tag(registry.redhat.io/ubi9/ubi-minimal:latest)
-# https://registry.access.redhat.com/ubi9/ubi-minimal
-FROM registry.access.redhat.com/ubi9-minimal:9.5-1730489338@sha256:6907fbacb294ab6ba988f8bcc6bd5127f589966e5808fcb454de3e104983ae5b AS runtime
+# https://registry.access.redhat.com/ubi9/ubi-minimal:9.5
+FROM registry.access.redhat.com/ubi9-minimal:9.5-1731604394@sha256:46f77b7dfba47b041de4c9d8516c24081fc92cc7743fca4a353e7f1c2a4beb19 AS runtime
 RUN microdnf update --setopt=install_weak_deps=0 -y && microdnf install -y openssl; microdnf clean -y all
-
-# RHIDP-4220 - make Konflux preflight and EC checks happy - [check-container] Create a directory named /licenses and include all relevant licensing
-COPY $EXTERNAL_SOURCE/LICENSE /licenses/
 
 # Upstream sources
 # Downstream comment
