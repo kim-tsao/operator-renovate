@@ -37,6 +37,20 @@
       "automerge": false
     },
     {
+      "description": "Do automerge patch updates to dockerfiles",
+      "enabled": true,
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "additionalBranchPrefix": "dockerfile ",
+      "groupName": "All dockerfile images",      
+      "automerge": true,
+      "pinDigests": false
+    },       
+    {
       "description": "k8s go: patch updates only in 1.y (these branches use go < 1.22)",
       "enabled": false,
       "groupName": "k8s-go 1.y",
@@ -44,8 +58,7 @@
         "go"
       ],
       "matchUpdateTypes": [
-        "patch",
-        "digest"
+        "minor"
       ],
       "matchBaseBranches": [
         "/^release-1\\.3/",
@@ -144,21 +157,7 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
-    },
-    {
-      "description": "Do automerge patch updates to dockerfiles",
-      "enabled": true,
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "additionalBranchPrefix": "dockerfile ",
-      "groupName": "All dockerfile images",      
-      "automerge": true,
-      "pinDigests": false
-    }    
+    } 
   ],
   "vulnerabilityAlerts": {
     "enabled": true,
