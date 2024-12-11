@@ -42,29 +42,7 @@
       "matchUpdateTypes": [
         "patch"
       ]
-    },   
-    {      
-      "groupName": "go toolchain patch update",
-      "groupSlug": "go-toolchain-patch",      
-      "matchCategories": [
-        "golang"
-      ],
-      "matchDepTypes": ["toolchain"],
-      "matchUpdateTypes": [
-        "patch"
-      ]
-    }, 
-    {
-      "groupName": "go toolchain minor update",
-      "groupSlug": "go-toolchain-minor",            
-      "matchCategories": [
-        "golang"
-      ],
-      "matchDepTypes": ["toolchain"],
-      "matchUpdateTypes": [
-        "minor"
-      ]
-    },               
+    },           
     {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
       "enabled": false,
