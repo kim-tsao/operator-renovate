@@ -45,8 +45,8 @@
     {      
       "groupName": "go toolchain patch update",
       "groupSlug": "go-toolchain-patch",      
-      "matchDatasources": [
-        "go"
+      "matchCategories": [
+        "golang"
       ],
       "matchDepTypes": ["toolchain"],
       "matchUpdateTypes": [
@@ -56,8 +56,8 @@
     {
       "groupName": "go toolchain minor update",
       "groupSlug": "go-toolchain-minor",            
-      "matchDatasources": [
-        "go"
+      "matchCategories": [
+        "golang"
       ],
       "matchDepTypes": ["toolchain"],
       "matchUpdateTypes": [
