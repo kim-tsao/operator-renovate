@@ -3,7 +3,6 @@
     "config:best-practices",
     ":gitSignOff",
     ":rebaseStalePrs",
-    "group:allNonMajor",
     "docker:disableMajor",
     "default:pinDigestsDisabled",
     "helpers:pinGitHubActionDigests"
@@ -23,6 +22,48 @@
     "enabled": false
   },   
   "packageRules": [
+    {
+      "groupName": "all minor dependencies",
+      "groupSlug": "all-minor",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    },   
+    {
+      "groupName": "all patch dependencies",
+      "groupSlug": "all-patch",
+      "matchPackageNames": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "patch"
+      ]
+    },   
+    {      
+      "groupName": "go toolchain patch update",
+      "groupSlug": "go-toolchain-patch",      
+      "matchDatasources": [
+        "go"
+      ],
+      "matchDepTypes": ["toolchain"],
+      "matchUpdateTypes": [
+        "patch"
+      ]
+    }, 
+    {
+      "groupName": "go toolchain minor update",
+      "groupSlug": "go-toolchain-minor",            
+      "matchDatasources": [
+        "go"
+      ],
+      "matchDepTypes": ["toolchain"],
+      "matchUpdateTypes": [
+        "minor"
+      ]
+    },               
     {
       "description": "Do NOT generate PRs to pin or apply digests to dockerfiles",
       "enabled": false,
