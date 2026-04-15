@@ -10,7 +10,7 @@
   "labels": [
     "kind/dependency upgrade"
   ],
-  "baseBranches": [
+  "baseBranchPatterns": [
     "main",
     "/^release-1\\..*/",
     "/^1\\.2\\.x/"
